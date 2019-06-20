@@ -70,7 +70,7 @@ int main() {
 }
 */
 // matrix multiply
-
+/*
 int main() {
     int *dim1 = new int[3]{2, 2, 1};
     int *dim2 = new int[3]{2, 1, 2};
@@ -90,7 +90,7 @@ int main() {
 	system("pause");
 	return 0;
 }
-
+*/
 
 //matrix dot add minus
 /*

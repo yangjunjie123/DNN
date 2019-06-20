@@ -65,7 +65,7 @@ void gen_inputs_from_mnist(DoubleVector4D &input_data, DoubleVector &label, int 
 	}
 }
 
-int man()
+int main()
 {
 	DoubleVector4D mnist_data;
 	DoubleVector label;
@@ -166,7 +166,7 @@ int man()
 	return 0;
 }
 
-int mai1n() {
+int man() {
 	//
 	auto full = new FullConnectedLayer<double>(1, 10, 4, 0.02);
 	Tensor<double>* res = full->getW();

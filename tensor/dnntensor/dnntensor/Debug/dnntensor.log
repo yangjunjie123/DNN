@@ -1,1 +1,10 @@
-﻿LINK : fatal error LNK1104: 无法打开文件“cudart.lib”
+﻿  FullTest.cpp
+c:\users\junjie\desktop\offer\tensor\dnntensor\dnntensor\layers\fulltest.cpp(47): warning C4244: “参数”: 从“unsigned __int64”转换到“unsigned int”，可能丢失数据
+c:\users\junjie\desktop\offer\tensor\dnntensor\dnntensor\layers\fulltest.cpp(49): warning C4244: “参数”: 从“unsigned __int64”转换到“unsigned int”，可能丢失数据
+c:\users\junjie\desktop\offer\tensor\dnntensor\dnntensor\layers\fulltest.cpp(51): warning C4244: “参数”: 从“unsigned __int64”转换到“unsigned int”，可能丢失数据
+c:\users\junjie\desktop\offer\tensor\dnntensor\dnntensor\layers\fulltest.cpp(116): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+  正在生成代码...
+  正在跳过...(未检测到相关更改)
+  TensorTest.cpp
+  dnntensor.vcxproj -> C:\Users\junjie\Desktop\offer\tensor\dnntensor\Debug\dnntensor.exe
+  dnntensor.vcxproj -> C:\Users\junjie\Desktop\offer\tensor\dnntensor\Debug\dnntensor.pdb (Partial PDB)

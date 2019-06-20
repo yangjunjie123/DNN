@@ -38,9 +38,9 @@ void tensor_matmul(const Tensor<T> *W, const Tensor<T> *X, Tensor<T> *output, bo
             for (int j = 0; j < x[1]; j++) {
                 out_data[i * x[1] + j] = 0;
                 for (int k = 0; k < x[0]; k++) {
-					out_data[i * x[1] + j] += w_data[i * w[1] + k] * x_data[k * x[1] + j];
-				}
-			}
+                out_data[i * x[1] + j] += w_data[i * w[1] + k] * x_data[k * x[1] + j];
+            }
+        }
         }
         sum--;
         while (sum--) {
@@ -212,67 +212,5 @@ void tensor_transpose(const Tensor<T> *input, Tensor<T> *output){
         cout << "Standard exception: " << e.what() << endl;
     };
 }
-
-template<class T>
-void tensor_matmul_double(const Tensor<T> *W, const Tensor<T> *X, Tensor<T> *output, bool w_flag = false, bool x_flag = false, bool out_flag = false) {
-	auto w_dim = W->getDimension();
-	auto x_dim = X->getDimension();
-	int w[2], x[2];
-	w[0] = w_dim[w_dim.size() - 2];
-	w[1] = w_dim[w_dim.size() - 1];
-	x[0] = x_dim[x_dim.size() - 2];
-	x[1] = x_dim[x_dim.size() - 1];
-	if (w_dim.size() != x_dim.size() || W->getSum() / w[0] != X->getSum() / x[1])
-		throw ("matmul input error and program terminated in " + W->getName() + " and " + X->getName() + "\n");
-
-	int w_warp = w[0] * w[1], x_warp = x[0] * x[1], out_warp = w[0] * x[1];
-	int sum = W->getSum() / w_warp;
-	T *w_data = W->data;
-	if (w_flag)
-		w_data = W->error;
-	T *x_data = X->data;
-	if (x_flag)
-		x_data = X->error;
-	T *out_data = output->data;
-	if (out_flag)
-		out_data = output->error;
-	try {
-		vector<double *> ins;
-		ins.push_back(w_data);
-		ins.push_back(x_data);
-		mat_mul_double(ins, out_data, w[0], w[1], x[1], 1)
-		/*for (int i = 0; i < w[0]; i++) {
-			for (int j = 0; j < x[1]; j++) {
-				out_data[i * x[1] + j] = 0;
-				for (int k = 0; k < x[0]; k++) {
-					out_data[i * x[1] + j] += w_data[i * w[1] + k] * x_data[k * x[1] + j];
-				}
-			}
-		}*/
-		sum--;
-		while (sum--) {
-			w_data = w_data + w_warp;
-			x_data = x_data + x_warp;
-			out_data = out_data + out_warp;
-			ins.clear();
-			vector<double *> ins;
-			ins.push_back(w_data);
-			ins.push_back(x_data);
-			mat_mul_double(ins, out_data, w[0], w[1], x[1], 1)
-			/*for (int i = 0; i < w[0]; i++) {
-				for (int j = 0; j < x[1]; j++) {
-					out_data[i * x[1] + j] = 0;
-					for (int k = 0; k < x[0]; k++) {
-						out_data[i * x[1] + j] += w_data[i * w[1] + k] * x_data[k * x[1] + j];
-					}
-				}
-			}*/
-		}
-	}
-	catch (exception &e) {
-		cout << "Standard exception: " << e.what() << endl;
-	};
-}
-
 
 #endif //AUTOML_TENSOR_OP_HPP
